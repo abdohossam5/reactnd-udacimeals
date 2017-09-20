@@ -36,10 +36,10 @@ function mapStateToProps(state, props) {
     }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-        addRecipe,
-        removeFromCalendar
+        selectRecipe: (data) => dispatch(addRecipe(data)),
+        removeRecipe: (data) => dispatch(removeFromCalendar(data))
     }
 }
 
