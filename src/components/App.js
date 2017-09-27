@@ -23,14 +23,20 @@ class App extends Component {
     }
 }
 
-function mapStateToProps(state, props) {
-    console.log(Object.keys(state));
+function mapStateToProps({recipes, calendar}, props) {
+    console.log(Object.keys(calendar));
 
     return {
-        calendar: Object.keys(state).map(day => ({
+        calendar: Object.keys(calendar).map(day => ({
             day,
             meals:{
-                ...state[day]
+                ...(Object.keys(calendar[day]).reduce(
+                    (acc,val) => {
+                        acc[val] = calendar[day][val] ?recipes[calendar[day][val]] : null;
+                        return acc;
+                    }
+                    , {})),
+
             }
         }))
     }
